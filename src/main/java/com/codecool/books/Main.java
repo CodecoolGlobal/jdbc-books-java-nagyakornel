@@ -69,8 +69,10 @@ public class Main {
 
         // TODO: update database parameters
         dataSource.setDatabaseName("books");
-        dataSource.setUser("pawel");
-        dataSource.setPassword("pawel");
+        String DB_USER = System.getenv().get("DB_USER");
+        String DB_PASSWORD = System.getenv().get("DB_PASSWORD");
+        dataSource.setUser(DB_USER);
+        dataSource.setPassword(DB_PASSWORD);
 
         ui.println("Trying to connect...");
         dataSource.getConnection().close();
