@@ -18,6 +18,7 @@ public class Main {
 
     UserInterface ui;
     AuthorDao authorDao;
+    BookDao bookDao;
 
     Main(UserInterface ui) {
         this.ui = ui;
@@ -38,7 +39,7 @@ public class Main {
                     new AuthorManager(ui, authorDao).run();
                     break;
                 case 'b':
-                    ui.println("Not implemented yet!");
+                    new BookManager(ui, bookDao, authorDao).run();
                     break;
                 case 'q':
                     running = false;
@@ -54,6 +55,7 @@ public class Main {
             case 'i':
                 ui.println("Using in-memory database");
                 authorDao = new AuthorDaoInMemory();
+                bookDao = new BookDaoInMemory();
                 createInitialData();
                 break;
             case 'j':
@@ -67,7 +69,6 @@ public class Main {
     private DataSource connect() throws SQLException {
         PGSimpleDataSource dataSource = new PGSimpleDataSource();
 
-        // TODO: update database parameters
         dataSource.setDatabaseName("books");
         String DB_USER = System.getenv().get("DB_USER");
         String DB_PASSWORD = System.getenv().get("DB_PASSWORD");
@@ -95,14 +96,14 @@ public class Main {
         authorDao.add(author3);
         authorDao.add(author4);
 
-        /*
+
         bookDao.add(new Book(author1, "Hobbit"));
         bookDao.add(new Book(author1, "Lord of the Rings"));
         bookDao.add(new Book(author2, "Hitchhiker's Guide to the Galaxy"));
         bookDao.add(new Book(author3, "A Game of Thrones"));
         bookDao.add(new Book(author3, "Tuf Voyaging"));
         bookDao.add(new Book(author4, "Dune"));
-         */
+
     }
 
 }
