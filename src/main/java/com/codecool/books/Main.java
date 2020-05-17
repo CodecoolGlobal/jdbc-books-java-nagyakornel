@@ -5,9 +5,7 @@ import com.codecool.books.view.UserInterface;
 import org.postgresql.ds.PGSimpleDataSource;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class Main {
@@ -61,7 +59,8 @@ public class Main {
             case 'j':
                 ui.println("Using JDBC");
                 DataSource dataSource = connect();
-                authorDao = new AuthorDaoJDBC(dataSource);
+                authorDao = new AuthorDaoInJDBC(dataSource);
+                bookDao = new BookDaoInJBDC(dataSource, (AuthorDaoInJDBC) authorDao);
                 break;
         }
     }

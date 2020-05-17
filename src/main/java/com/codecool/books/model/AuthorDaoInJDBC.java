@@ -8,10 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthorDaoJDBC implements AuthorDao {
+public class AuthorDaoInJDBC implements AuthorDao {
     private DataSource dataSource;
 
-    public AuthorDaoJDBC(DataSource dataSource) {
+    public AuthorDaoInJDBC(DataSource dataSource) {
         this.dataSource = dataSource;
     }
 
